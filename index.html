@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Living in the IT Era Reviewer</title>
+<style>
+:root{--bg:#04070f;--bg2:#0a0f1f;--txt:#eef2ff;--mut:#8f9cc4;--ac:#2dd4bf;--ac2:#60a5fa;--ac3:#f59e0b;--ok:#34d399;--bad:#fb7185;--warn:#fbbf24;--line:rgba(255,255,255,.09);--glass:rgba(255,255,255,.045);--glass2:rgba(255,255,255,.08);--r:22px}
+[data-theme=violet]{--ac:#a78bfa;--ac2:#f472b6;--ac3:#22d3ee}
+[data-theme=rose]{--ac:#fb7185;--ac2:#fbbf24;--ac3:#a78bfa}
+[data-theme=sky]{--ac:#38bdf8;--ac2:#818cf8;--ac3:#34d399}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:auto;scroll-padding-top:90px}
+body{margin:0;font-family:'Inter','Segoe UI',system-ui,-apple-system,Arial,sans-serif;background:var(--bg);color:var(--txt);line-height:1.65;min-height:100vh;overflow-x:hidden}
+::selection{background:var(--ac);color:#02060c}
+::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-thumb{background:linear-gradient(var(--ac),var(--ac2));border-radius:10px}::-webkit-scrollbar-track{background:transparent}
+button{font-family:inherit}
+
+/* ---------- background ---------- */
+#fx{position:fixed;inset:0;z-index:-3;width:100%;height:100%}
+.aurora{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
+.aurora i{position:absolute;width:55vmax;height:55vmax;border-radius:50%;filter:blur(110px);opacity:.32;animation:drift 22s ease-in-out infinite alternate;will-change:transform}
+.aurora i:nth-child(1){background:var(--ac2);top:-25%;left:-15%}
+.aurora i:nth-child(2){background:var(--ac);bottom:-30%;right:-15%;animation-delay:-8s}
+.aurora i:nth-child(3){background:var(--ac3);top:30%;left:35%;width:34vmax;height:34vmax;opacity:.14;animation-delay:-14s}
+.grid{position:fixed;inset:0;z-index:-2;pointer-events:none;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(ellipse at 50% 30%,#000 10%,transparent 70%);-webkit-mask-image:radial-gradient(ellipse at 50% 30%,#000 10%,transparent 70%);opacity:.5}
+@keyframes drift{to{transform:translate(9vmax,7vmax) scale(1.18) rotate(20deg)}}
+@keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes pop{from{opacity:0;transform:scale(.95) translateY(-8px)}to{opacity:1;transform:none}}
+@keyframes pulse{50%{opacity:.5;transform:scale(1.05)}}
+@keyframes shine{to{background-position:200% center}}
+@keyframes blink{50%{opacity:0}}
+
+#prog{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--ac),var(--ac2),var(--ac3));z-index:80;box-shadow:0 0 16px var(--ac)}
+
+/* ---------- header ---------- */
+header{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:10px;padding:12px clamp(14px,3vw,34px);background:rgba(4,7,15,.55);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);border-bottom:1px solid var(--line);flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:11px;margin-right:auto;font-weight:800;font-size:18px;letter-spacing:.3px}
+.logo{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,var(--ac),var(--ac2));color:#04070f;font-weight:900;font-size:15px;box-shadow:0 0 24px color-mix(in srgb,var(--ac) 60%,transparent);animation:pulse 3.5s ease-in-out infinite}
+.brand small{display:block;font-weight:500;font-size:11px;color:var(--mut);letter-spacing:1.5px;text-transform:uppercase;margin-top:-3px}
+.tabs{display:flex;gap:4px;background:var(--glass);border:1px solid var(--line);padding:4px;border-radius:14px}
+.tab{background:none;border:0;color:var(--mut);padding:8px 16px;border-radius:10px;font-weight:700;font-size:14px;cursor:pointer;transition:.25s}
+.tab:hover{color:var(--txt)}
+.tab.on{background:linear-gradient(135deg,var(--ac),var(--ac2));color:#04070f;box-shadow:0 4px 18px color-mix(in srgb,var(--ac) 40%,transparent)}
+.dots{display:flex;gap:7px;align-items:center}
+.dots b{width:17px;height:17px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:.2s}
+.dots b:hover{transform:scale(1.2)}
+.dots b.on{border-color:#fff;box-shadow:0 0 12px currentColor}
+.ibtn{background:var(--glass);border:1px solid var(--line);color:var(--txt);padding:8px 13px;border-radius:12px;cursor:pointer;font-weight:600;font-size:13px;transition:.25s}
+.ibtn:hover{border-color:var(--ac);box-shadow:0 0 18px color-mix(in srgb,var(--ac) 35%,transparent);transform:translateY(-1px)}
+
+/* ---------- buttons ---------- */
+.btn{background:linear-gradient(135deg,var(--ac),var(--ac2));color:#04070f;border:0;padding:12px 22px;border-radius:14px;font-weight:800;cursor:pointer;font-size:15px;box-shadow:0 6px 24px color-mix(in srgb,var(--ac) 35%,transparent);transition:.25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 34px color-mix(in srgb,var(--ac2) 50%,transparent)}
+.btn:active{transform:scale(.97)}
+.btn:disabled{opacity:.35;cursor:not-allowed;transform:none;box-shadow:none}
+.btn.ghost{background:var(--glass);color:var(--txt);border:1px solid var(--line);box-shadow:none}
+.btn.ghost:hover{border-color:var(--ac);box-shadow:0 0 22px color-mix(in srgb,var(--ac) 30%,transparent)}
+.btn.sm{padding:8px 14px;font-size:13px;border-radius:11px}
+.btn.big{padding:16px 34px;font-size:17px;border-radius:16px}
+
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(14px,3vw,34px) 80px}
+.hide{display:none!important}
+
+/* ---------- hero ---------- */
+.hero{padding:60px 0 34px;display:grid;grid-template-columns:1.15fr .85fr;gap:36px;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:30px;background:var(--glass);border:1px solid var(--line);font-size:12px;letter-spacing:1.6px;text-transform:uppercase;color:var(--ac);font-weight:700}
+.pill::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 12px var(--ok);animation:pulse 2s infinite}
+.hero h2{font-size:clamp(38px,6vw,70px);line-height:1.04;margin:18px 0 14px;font-weight:900;letter-spacing:-1.5px}
+.grad{background:linear-gradient(90deg,var(--ac),var(--ac2),var(--ac3),var(--ac));background-size:200% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:shine 6s linear infinite}
+.hero p{color:var(--mut);font-size:18px;max-width:560px;margin:0 0 26px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.term{background:rgba(3,5,14,.8);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.5),0 0 60px color-mix(in srgb,var(--ac2) 18%,transparent);transform:perspective(1100px) rotateY(-7deg) rotateX(3deg);transition:transform .5s}
+.term:hover{transform:perspective(1100px) rotateY(0) rotateX(0)}
+.bar3{display:flex;gap:7px;align-items:center;padding:12px 15px;background:rgba(255,255,255,.04);border-bottom:1px solid var(--line)}
+.bar3 i{width:12px;height:12px;border-radius:50%}
+.bar3 i:nth-child(1){background:#ff5f57}.bar3 i:nth-child(2){background:#febc2e}.bar3 i:nth-child(3){background:#28c840}
+.bar3 span{margin-left:auto;font-size:12px;color:var(--mut);font-family:Consolas,monospace}
+.term pre{margin:0;padding:20px;min-height:250px;font-family:Consolas,'Fira Code',monospace;font-size:14px;line-height:1.75;white-space:pre-wrap;color:#cbd5ff}
+.tg{color:var(--ac3);font-weight:700}.nu{color:var(--ac)}.st{color:#a7f3d0}
+.term .cur{display:inline-block;width:9px;height:17px;background:var(--ac);vertical-align:-3px;margin-left:2px;animation:blink 1s step-end infinite}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:6px 0 10px}
+.stat{background:var(--glass);border:1px solid var(--line);border-radius:18px;padding:16px 18px;backdrop-filter:blur(10px);transition:.3s}
+.stat:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--ac) 50%,transparent)}
+.stat b{display:block;font-size:30px;font-weight:900;line-height:1.1}
+.stat span{font-size:12px;color:var(--mut);text-transform:uppercase;letter-spacing:1.2px}
+
+/* ---------- layout ---------- */
+.layout{display:grid;grid-template-columns:290px 1fr;gap:30px;align-items:start;margin-top:28px}
+#side{position:sticky;top:88px;background:var(--glass);border:1px solid var(--line);border-radius:var(--r);padding:16px;backdrop-filter:blur(14px);max-height:calc(100vh - 110px);overflow:auto}
+#side h4{margin:2px 6px 10px;font-size:12px;letter-spacing:1.6px;text-transform:uppercase;color:var(--mut)}
+#side a{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:12px;color:var(--mut);text-decoration:none;font-size:14px;font-weight:600;transition:.2s;border:1px solid transparent}
+#side a em{flex:none;width:26px;height:26px;border-radius:8px;display:grid;place-items:center;font-style:normal;font-size:12px;font-weight:800;background:var(--glass2);transition:.2s}
+#side a:hover{color:var(--txt);background:var(--glass)}
+#side a.on{color:var(--txt);background:linear-gradient(135deg,color-mix(in srgb,var(--ac) 18%,transparent),color-mix(in srgb,var(--ac2) 18%,transparent));border-color:color-mix(in srgb,var(--ac) 35%,transparent)}
+#side a.on em{background:linear-gradient(135deg,var(--ac),var(--ac2));color:#04070f}
+#side a.done em{background:var(--ok);color:#03150d}
+#side a.done em::after{content:"\2713"}
+#side a.done em span{display:none}
+.mod{margin:14px 6px 4px;font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--ac);font-weight:800}
+
+/* ---------- topic cards ---------- */
+.card{position:relative;background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-radius:var(--r);padding:clamp(18px,3vw,30px);margin:0 0 24px;border:1px solid var(--line);box-shadow:0 16px 50px rgba(0,0,0,.35);transition:border-color .3s,box-shadow .3s;overflow:hidden}
+.card:hover{border-color:color-mix(in srgb,var(--ac) 40%,transparent)}
+.rv{opacity:0;transform:translateY(26px);transition:opacity .7s,transform .7s}
+.rv.in{opacity:1;transform:none}
+.th{display:flex;align-items:flex-start;gap:16px;margin-bottom:16px}
+.num{flex:none;width:52px;height:52px;border-radius:16px;display:grid;place-items:center;font-weight:900;font-size:20px;background:linear-gradient(135deg,var(--ac),var(--ac2));color:#04070f;box-shadow:0 8px 26px color-mix(in srgb,var(--ac) 40%,transparent)}
+.th h3{margin:0;font-size:clamp(18px,2.4vw,24px);line-height:1.3;font-weight:800}
+.th small{display:block;color:var(--mut);font-weight:600;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:2px}
+ul.pts{list-style:none;padding:0;margin:0}
+ul.pts li{position:relative;padding:11px 14px 11px 42px;margin:8px 0;background:rgba(255,255,255,.025);border:1px solid transparent;border-radius:14px;transition:.25s}
+ul.pts li::before{content:"";position:absolute;left:16px;top:20px;width:9px;height:9px;border-radius:3px;background:linear-gradient(135deg,var(--ac),var(--ac3));transform:rotate(45deg)}
+ul.pts li:hover{background:rgba(255,255,255,.055);border-color:var(--line);transform:translateX(4px)}
+code{background:color-mix(in srgb,var(--ac) 12%,transparent);border:1px solid color-mix(in srgb,var(--ac) 28%,transparent);padding:1px 8px;border-radius:8px;color:#fde68a;font-family:inherit;font-weight:700;font-size:.95em}
+b{color:#fff}
+.sh{margin:22px 0 10px;font-size:12px;letter-spacing:1.6px;text-transform:uppercase;color:var(--ac);font-weight:800;display:flex;align-items:center;gap:10px}
+.sh::after{content:"";flex:1;height:1px;background:var(--line)}
+.fg{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.fc{padding:13px 15px;border-radius:15px;background:rgba(255,255,255,.035);border:1px solid var(--line);transition:.25s}
+.fc:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--ac) 50%,transparent);box-shadow:0 10px 30px rgba(0,0,0,.3)}
+.fc b{display:block;color:var(--ac);font-size:13.5px;margin-bottom:2px}
+.fc span{font-size:14.5px;color:#d6dcf7;line-height:1.5;display:block}
+.tl{position:relative;margin:4px 0 4px 8px;padding-left:28px;border-left:2px solid color-mix(in srgb,var(--ac) 40%,transparent)}
+.ti{position:relative;margin:0 0 14px;padding:11px 14px;border-radius:14px;background:rgba(255,255,255,.03);border:1px solid transparent;transition:.25s}
+.ti::before{content:"";position:absolute;left:-37px;top:17px;width:14px;height:14px;border-radius:50%;background:var(--bg);border:3px solid var(--ac);box-shadow:0 0 12px var(--ac)}
+.ti:hover{background:rgba(255,255,255,.06);border-color:var(--line);transform:translateX(4px)}
+.ti .yr{display:inline-block;margin-bottom:3px;padding:1px 10px;border-radius:20px;background:linear-gradient(135deg,var(--ac),var(--ac2));color:#04070f;font-weight:800;font-size:12px}
+.ti div{font-size:15px;color:#dbe1fa}
+
+.eli{margin-top:22px}
+.e5{max-height:0;opacity:0;overflow:hidden;transition:max-height .5s,opacity .4s,margin .4s,padding .4s;background:linear-gradient(135deg,color-mix(in srgb,var(--ac2) 30%,transparent),color-mix(in srgb,var(--ac3) 20%,transparent));border:1px solid color-mix(in srgb,var(--ac2) 45%,transparent);border-radius:16px;padding:0 18px;font-size:15.5px}
+.e5.on{max-height:360px;opacity:1;margin-top:14px;padding:16px 18px}
+.mark{float:right}
+.mark.done{background:linear-gradient(135deg,var(--ok),#10b981);color:#03150d;border:0}
+
+/* ---------- exam home ---------- */
+.xh{max-width:760px;margin:48px auto 0}
+.rules{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:20px 0}
+.rule{display:flex;gap:12px;align-items:flex-start;background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:16px;padding:14px}
+.rule b{font-size:26px;line-height:1}
+.rule span{font-size:14.5px;color:#cfd6f5}
+.warnbox{background:linear-gradient(135deg,rgba(251,191,36,.16),rgba(251,113,133,.14));border:1px solid rgba(251,191,36,.45);border-radius:16px;padding:14px 16px;margin:14px 0;font-weight:600}
+.xh h2{font-size:34px;margin:0 0 4px;font-weight:900}
+
+/* ---------- exam ---------- */
+#exam{max-width:1000px;margin:0 auto;padding:22px clamp(14px,3vw,24px) 60px}
+.xtop{display:flex;align-items:center;gap:18px;margin-bottom:16px;flex-wrap:wrap}
+.ring{position:relative;width:96px;height:96px;flex:none}
+.ring svg{transform:rotate(-90deg);width:100%;height:100%}
+.ring circle{fill:none;stroke-width:8;stroke-linecap:round}
+.ring .tr{stroke:var(--glass2)}
+.ring .pr{stroke:url(#gr);stroke-dasharray:326.7;stroke-dashoffset:0;transition:stroke-dashoffset .5s linear}
+.ring.low .pr{stroke:var(--bad)}
+.timer{position:absolute;inset:0;display:grid;place-items:center;font-family:Consolas,monospace;font-weight:800;font-size:21px}
+.ring.low .timer{color:var(--bad)}
+.xinfo{flex:1;min-width:200px}
+.xinfo b{font-size:20px}
+.pbar{height:8px;background:var(--glass2);border-radius:9px;overflow:hidden;margin-top:9px}
+.pbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--ac),var(--ac2),var(--ac3));transition:width .4s;box-shadow:0 0 14px var(--ac)}
+.qnav{display:grid;grid-template-columns:repeat(auto-fill,minmax(52px,1fr));gap:10px;margin:14px 0 4px}
+.qnav button{width:100%;aspect-ratio:1;background:var(--glass);color:var(--mut);border:1px solid var(--line);border-radius:14px;cursor:pointer;font-weight:700;transition:.2s;position:relative}
+.qnav button:hover{border-color:var(--ac);color:var(--txt)}
+.qnav button.done{background:linear-gradient(135deg,var(--ok),#10b981);color:#03150d;border:0}
+.qnav button.fl::after{content:"\2691";position:absolute;top:-6px;right:-3px;font-size:12px;color:var(--warn)}
+.qnav button.cur{outline:none;box-shadow:none;border:2px solid var(--ac);color:var(--txt)}
+.qcard{padding:clamp(18px,3vw,32px);animation:pop .35s both}
+.qhead{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.qtag{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ac);font-weight:800}
+.flag{margin-left:auto}
+.flag.on{background:rgba(251,191,36,.18);border-color:var(--warn);color:var(--warn)}
+.qtext{font-size:clamp(18px,2.4vw,23px);font-weight:700;line-height:1.5;margin:0 0 20px}
+.opts{counter-reset:o;display:grid;gap:11px}
+.opt{counter-increment:o;display:flex;align-items:center;gap:14px;text-align:left;width:100%;background:rgba(255,255,255,.035);color:var(--txt);padding:14px 16px;border:1px solid var(--line);border-radius:16px;font-size:16px;font-weight:600;cursor:pointer;transition:.22s;animation:rise .4s both}
+.opt:nth-child(2){animation-delay:.05s}.opt:nth-child(3){animation-delay:.1s}.opt:nth-child(4){animation-delay:.15s}
+.opt::before{content:counter(o,upper-alpha);flex:none;width:34px;height:34px;border-radius:11px;display:grid;place-items:center;background:var(--glass2);font-weight:900;color:var(--ac);transition:.22s}
+.opt:hover{transform:translateX(7px);border-color:var(--ac);box-shadow:0 0 24px color-mix(in srgb,var(--ac) 25%,transparent)}
+.opt.sel{border-color:var(--ac);background:linear-gradient(135deg,color-mix(in srgb,var(--ac) 22%,transparent),color-mix(in srgb,var(--ac2) 22%,transparent));box-shadow:0 0 30px color-mix(in srgb,var(--ac) 30%,transparent)}
+.opt.sel::before{background:linear-gradient(135deg,var(--ac),var(--ac2));color:#04070f}
+.xnav{display:flex;gap:10px;margin-top:20px;align-items:center;flex-wrap:wrap}
+.xnav .sp{flex:1}
+.kb{font-size:12px;color:var(--mut)}
+.kb kbd{background:var(--glass2);border:1px solid var(--line);border-radius:6px;padding:1px 7px;font-family:Consolas,monospace}
+
+/* modal */
+.modal{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:rgba(2,3,10,.7);backdrop-filter:blur(8px);animation:rise .25s both;padding:18px}
+.mbox{max-width:440px;width:100%;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:28px;box-shadow:0 40px 100px rgba(0,0,0,.7);animation:pop .3s both;text-align:center}
+.mbox h3{margin:0 0 8px;font-size:24px}
+.mbox p{color:var(--mut);margin:0 0 20px}
+.mbox .row{display:flex;gap:10px;justify-content:center}
+
+/* ---------- results ---------- */
+.res{display:flex;gap:26px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
+.sring{position:relative;width:170px;height:170px;flex:none}
+.sring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.sring circle{fill:none;stroke-width:11;stroke-linecap:round}
+.sring .tr{stroke:var(--glass2)}
+.sring .pr{stroke:url(#gr2);stroke-dasharray:471.2;stroke-dashoffset:471.2;transition:stroke-dashoffset 1.6s cubic-bezier(.2,.8,.2,1)}
+.sring .mid{position:absolute;inset:0;display:grid;place-items:center;text-align:center}
+.sring .mid b{font-size:44px;font-weight:900;line-height:1}
+.sring .mid span{display:block;font-size:12px;color:var(--mut);letter-spacing:1px}
+.rtxt h3{font-size:30px;margin:0 0 6px;font-weight:900}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+.chip{padding:6px 14px;border-radius:30px;border:1px solid var(--line);background:var(--glass);font-size:13px;font-weight:700;cursor:pointer;color:var(--mut);transition:.2s}
+.chip.on{background:linear-gradient(135deg,var(--ac),var(--ac2));color:#04070f;border:0}
+.ak{margin:10px 0;padding:14px 16px;border-left:4px solid var(--ok);background:rgba(255,255,255,.035);border-radius:14px;animation:rise .4s both}
+.ak.x{border-left-color:var(--bad)}
+.ak p{margin:0 0 6px;font-weight:600}
+.ak .y{font-size:14px;color:var(--mut)}
+.ak .c{font-size:14px;color:var(--ok);font-weight:800}
+.ak .rv2{font-size:12px;color:var(--mut);margin-top:4px}
+.note{color:var(--mut);font-size:14px}
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:90;width:100%;height:100%}
+footer{text-align:center;color:var(--mut);font-size:13px;padding:30px 0 10px}
+
+/* ---------- responsive ---------- */
+@media(max-width:980px){
+  .hero{grid-template-columns:1fr;padding-top:34px}.term{transform:none}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .layout{grid-template-columns:1fr}
+  #side{position:sticky;top:64px;z-index:30;display:flex;gap:6px;overflow-x:auto;padding:8px;max-height:none;border-radius:16px}
+  #side h4,.mod{display:none}#side a{flex:none;white-space:nowrap}#side a span.t{display:none}
+  .rules{grid-template-columns:1fr}
+  .dots{display:none}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ---------- print (Print button saves the reviewer as PDF) ---------- */
+@media print{
+  #fx,.aurora,.grid,header,.hero,.stats,#side,.cta,.eli .btn,#exh,#exam,footer,#prog,#confetti{display:none!important}
+  body{background:#fff;color:#111}
+  .layout{display:block;margin:0}
+  .card{background:#fff;border:1px solid #bbb;box-shadow:none;break-inside:avoid;opacity:1!important;transform:none!important;backdrop-filter:none}
+  .card::before{display:none}
+  .rv{opacity:1!important;transform:none!important}
+  b,.th h3{color:#111}.fc b{color:#0f766e}.fc span,.ti div,ul.pts li{color:#222}
+  ul.pts li,.fc,.ti{background:#fafafa;border:1px solid #e5e5e5}
+  code{color:#7c2d12;background:#fff7ed;border-color:#fdba74}
+  .e5{max-height:none!important;opacity:1!important;margin-top:8px;padding:10px 14px;background:#f3f0ff;border-color:#c4b5fd;color:#111}
+  .ti::before{background:#fff}.ti .yr{color:#04070f}
+}
+</style>
+</head>
+<body>
+<canvas id="fx"></canvas>
+<div class="aurora"><i></i><i></i><i></i></div>
+<div class="grid"></div>
+<canvas id="confetti" class="hide"></canvas>
+<div id="prog"></div>
+
+<header id="topbar">
+  <div class="brand"><div class="logo">IT</div><div>IT Era Reviewer<small>GE LITE &middot; Living in the IT Era</small></div></div>
+  <div class="tabs">
+    <button class="tab on" id="tabRev" onclick="show('rev')">&#128216; Reviewer</button>
+    <button class="tab" id="tabEx" onclick="show('exh')">&#128221; Exam</button>
+  </div>
+  <div class="dots" id="dots" title="Accent color">
+    <b style="background:#2dd4bf;color:#2dd4bf" data-t="teal"></b>
+    <b style="background:#38bdf8;color:#38bdf8" data-t="sky"></b>
+    <b style="background:#a78bfa;color:#a78bfa" data-t="violet"></b>
+    <b style="background:#fb7185;color:#fb7185" data-t="rose"></b>
+  </div>
+  <button class="ibtn" onclick="toggleAll()">&#129490; ELI5 all</button>
+  <button class="ibtn" onclick="printRev()">&#128424; Print</button>
+</header>
+
+<main class="wrap">
+  <!-- REVIEWER -->
+  <section id="rev">
+    <div class="hero">
+      <div>
+        <span class="pill">Modules 1 to 3 &middot; 13 topics</span>
+        <h2>Master the <span class="grad">IT Era</span><br>one topic at a time.</h2>
+        <p>ICT, the history of computers, and the web and the internet. Short summaries, timelines, kid simple explanations, and a timed 40 item exam to prove you got it.</p>
+        <div class="cta">
+          <button class="btn big" onclick="document.getElementById('t0').scrollIntoView()">Start reviewing &rarr;</button>
+          <button class="btn big ghost" onclick="show('exh')">Take the exam</button>
+        </div>
+      </div>
+      <div class="term">
+        <div class="bar3"><i></i><i></i><i></i><span>it_era.log</span></div>
+        <pre id="typer"></pre>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat"><b id="sTop">0/13</b><span>Topics studied</span></div>
+      <div class="stat"><b>40</b><span>Exam items</span></div>
+      <div class="stat"><b>30:00</b><span>Time limit</span></div>
+      <div class="stat"><b id="sBest">--</b><span>Best score</span></div>
+    </div>
+    <div class="layout">
+      <nav id="side"><h4>Topics</h4></nav>
+      <div id="topics"></div>
+    </div>
+  </section>
+
+  <!-- EXAM HOME -->
+  <section id="exh" class="hide">
+    <div class="xh">
+      <div class="card">
+        <h2>&#128221; Exam <span class="grad">Arena</span></h2>
+        <p class="note">Focus up. Once you start, there is no turning back.</p>
+        <div class="rules">
+          <div class="rule"><b>&#129518;</b><span>40 items covering all 13 topics</span></div>
+          <div class="rule"><b>&#9201;&#65039;</b><span>30 minutes only</span></div>
+          <div class="rule"><b>&#128584;</b><span>The reviewer is hidden during the exam</span></div>
+          <div class="rule"><b>&#128683;</b><span>Switch tabs or minimize and the exam ends. No score or answers shown.</span></div>
+        </div>
+        <p class="note">You can retake it only after 30 minutes.</p>
+        <div id="cool" class="warnbox hide"></div>
+        <button class="btn big" id="startBtn" onclick="startExam()">Start Exam &#128640;</button>
+      </div>
+      <div id="resultBox"></div>
+    </div>
+  </section>
+</main>
+
+<!-- EXAM -->
+<section id="exam" class="hide">
+  <div class="card" style="margin-bottom:18px">
+    <div class="xtop">
+      <div class="ring" id="ring">
+        <svg viewBox="0 0 120 120"><defs><linearGradient id="gr" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2dd4bf"/><stop offset="1" stop-color="#60a5fa"/></linearGradient></defs><circle class="tr" cx="60" cy="60" r="52"/><circle class="pr" id="pr" cx="60" cy="60" r="52"/></svg>
+        <div class="timer" id="timer">30:00</div>
+      </div>
+      <div class="xinfo"><b id="qcount"></b><div class="pbar"><i id="abar"></i></div><div class="kb" style="margin-top:8px">Keys: <kbd>1</kbd>-<kbd>4</kbd> pick &middot; <kbd>&larr;</kbd> <kbd>&rarr;</kbd> move &middot; <kbd>F</kbd> flag</div></div>
+      <button class="btn" onclick="submitExam()">Submit &#10004;</button>
+    </div>
+    <div class="qnav" id="qnav"></div>
+  </div>
+  <div class="card qcard" id="qbox"></div>
+  <div class="xnav">
+    <button class="btn ghost" onclick="go(-1)">&#9664; Prev</button>
+    <span class="sp"></span>
+    <button class="btn ghost" onclick="go(1)">Next &#9654;</button>
+  </div>
+</section>
+
+<footer id="foot">Made for studying. Good luck! &#128156;</footer>
+
+<script>
+/* ===================== CONTENT (generated from the 3 modules) ===================== */
+const T=[{"t": "Information and Communication Technology (ICT)", "sum": ["[[ICT]] stands for Information and Communications Technology. It is the infrastructure and components that enable modern computing.", "ICT means all [[devices]], [[networking components]], [[applications]] and [[systems]] that together let people and organizations (businesses, nonprofits, governments) interact in the digital world.", "There is no single, universal definition of ICT.", "Long ago people communicated by letters sent through post mail. Today ICT lets us reach loved ones far away using cellular phones, chat, e-mail, voice mail and social networking.", "ICT is the cheapest means of communication.", "Module objectives: be ready for the semester, know your learning outcomes, and know the role and importance of ICT."], "secs": [{"h": "Key facts", "s": "grid", "items": [["ICT", "Information and Communications Technology"], ["It includes", "Devices, networks, applications and systems"], ["Past", "Letters sent through post mail"], ["Present", "Phones, chat, e-mail, voice mail, social media"]]}], "eli5": "ICT is all the gadgets and tools that help people share information, like phones, computers and the internet. Long ago people mailed letters and waited for days. Now you can talk to someone far away in one second.", "m": 0}, {"t": "Uses of ICT in Our Daily Lives", "sum": ["[[Communication]]: chatting, e-mail, voice mail and social networking keep people in touch. ICT also lets students manage their own learning, think critically, work together and see issues with a global perspective.", "ICT gives students in remote areas access to expert teachers and learning resources.", "[[Job opportunities]]: ICT helps organizations run efficiently, so staff with ICT skills are vital and employers now expect basic ICT skills.", "Example: many pharmacies use robot technology to pick prescribed drugs, so highly trained staff can focus on dispensing and checking medication.", "You can now look for a job from home using a smartphone, laptop or desktop.", "[[Education]]: ICT helps learning when teachers are digitally literate. Examples: interactive digital whiteboards, students using their own smartphones in class, and the [[flipped classroom]].", "[[Socializing]]: social media changed how we find partners, get news and organize for political change. Sites include Facebook, Twitter, LinkedIn, YouTube, Flickr, Second Life, Delicious, blogs and wikis. Facebook seems to be the leading place to share opinions.", "The [[internet]] is the international network of interconnected computer networks. Its main purpose is the quest for information (browsing, e-mail, newsgroups, file transfer)."], "secs": [{"h": "Key facts", "s": "grid", "items": [["Flipped classroom", "Lectures watched at home, exercises done in class"], ["Pharmacy robots", "Pick drugs so staff can dispense and check medication"], ["Job hunting", "Done from home with a phone, laptop or desktop"], ["Leading social site", "Facebook (per the module)"], ["Socialization", "How a child adapts behavior to be an effective member of society, through learning or education"]]}], "eli5": "Everyday ICT is everywhere. You message friends, learn in class with screens, and even search for jobs on your phone. Social media is like a giant town square where everyone shares what they think.", "m": 0}, {"t": "Impact of ICT in Society", "sum": ["[[Positive impacts]]: better and cheaper communication (VoIP, instant messaging, e-mail, video conferencing), improved access to education (distance learning, online tutorials, interactive multimedia, virtual reality), and new tools such as digital cameras, photo-editing software and screen-reading software for the blind.", "More positives: information management (data mining for targeted advertising, better stock control), security (encryption keeps data safe while stored or sent), 'impossible' experiments through simulations, access to worldwide markets and society, and new jobs such as systems analysts, programmers, software engineers and help desk operators.", "[[Negative impacts]]: job loss, reduced personal interaction, reduced physical activity, cost, and competition.", "[[Job loss]] comes from automation (robots on an assembly line), job export (data processing sent to cheaper countries), and fewer workers doing the same work (a bar-code scanner at the checkout).", "[[Reduced physical activity]] can lead to obesity, heart disease and diabetes."], "secs": [{"h": "Positives vs negatives", "s": "grid", "items": [["Positive: Education", "Distance learning, online tutorials, VR"], ["Positive: Communication", "VoIP, e-mail and video conferencing save cost"], ["Positive: Security", "Encryption protects stored and sent data"], ["Positive: Jobs", "Systems analysts, programmers, help desk"], ["Negative: Job loss", "Automation, job export, fewer workers needed"], ["Negative: Interaction", "Less social contact can cause isolation"], ["Negative: Health", "Less activity: obesity, heart disease, diabetes"], ["Negative: Cost", "Expensive hardware, software and specialist staff"], ["Negative: Competition", "Rivals may offer the same service for less"]]}], "eli5": "ICT is like a superpower with side effects. It makes talking, learning and working easier and cheaper. But machines can take over some jobs, we may sit too much, and fancy gadgets cost a lot.", "m": 0}, {"t": "Definition and Characteristics of a Computer", "sum": ["A [[computer]] is a programmable machine.", "It is an electronic device that manipulates information, or data. It can store, retrieve and process data.", "It manipulates data according to a list of instructions called a [[program]].", "It is any device that aids humans in performing computations or calculations.", "The earliest 'computers' were humans whose job title was computer. They worked out mathematical expressions after years of math training. The word 'computer' was first recorded in [[1613]] for a person who did calculations, and kept that meaning until the middle of the 20th century."], "secs": [{"h": "Three principal characteristics", "s": "grid", "items": [["Characteristic 1", "Responds to a specific set of instructions in a well-defined manner"], ["Characteristic 2", "Can execute a pre-recorded list of instructions"], ["Characteristic 3", "Can quickly store and retrieve large amounts of data"]]}], "eli5": "A computer is a super fast helper that follows instructions exactly. It cannot think by itself. You give it a list of steps, and it remembers a lot and works very quickly. Long ago, 'computer' was even the job name of people who did math all day.", "m": 1}, {"t": "Applications of ICT (Computers) in Daily Life", "sum": ["The module lists 20 areas where computers are used.", "Business: store accounts and records, manage projects, track inventory, make presentations and reports, and talk with customers.", "Education: audio-visual packages, interactive exercises, e-books, online exams and tutoring over the internet.", "Navigation: computers combined with GPS and satellites pinpoint your exact location.", "Robotics: one of the first uses was in manufacturing to build cars."], "secs": [{"h": "The 20 applications", "s": "grid", "items": [["Business", "Accounts, records, projects, inventory, e-mail"], ["Education", "E-learning, e-books, online exams, tutoring"], ["Healthcare", "Digital patient data, diagnosis aid, lab and heart monitors"], ["Retail and Trade", "Buy and sell online, compare prices (eBay, Craigslist)"], ["Government", "City planning, law enforcement, traffic, tourism"], ["Marketing", "Data-driven campaigns, websites, social media"], ["Science", "Research, data analysis, controlling spacecraft"], ["Publishing", "Newsletters, magazines, novels, e-books"], ["Arts and Entertainment", "Drawing, photos, music, video, games"], ["Communication", "Video calls, e-mail, videoconferencing (Skype)"], ["Banking and Finance", "Check balances, transfer money, trade stocks"], ["Transport", "Safety and navigation systems, automated driving"], ["Navigation", "Computers plus GPS and satellites show your location"], ["Working From Home", "Remote work and remote monitoring"], ["Military", "Training, intelligence, smart weapons, drones"], ["Social and Romance", "Social media, dating apps, blogs, forums"], ["Booking Vacations", "Timetables, tickets, hotels, Air BnB"], ["Security and Surveillance", "Biometric passports, face recognition, speed cameras"], ["Weather Forecasting", "Processes huge amounts of meteorological data"], ["Robotics", "Machines for harsh or specific jobs, first used to build cars"]]}], "eli5": "Computers are helpers in almost every job: banks, hospitals, schools, shops, planes, phones, and even weather reports. Anywhere there is lots of information to store, send or calculate, there is probably a computer.", "m": 1}, {"t": "Early Computing Devices (Tally Sticks to Arithmometer)", "sum": ["Calculations were first done by humans. Early devices were memory and calculation aids.", "Remember who invented what and when: Napier (1614), Oughtred (1622), Pascal (1642), Leibniz (1672), de Colmar (1820).", "The [[Pascaline]] was limited to addition and subtraction and was too expensive.", "The [[Stepped Reckoner]] could add, subtract, multiply and divide automatically.", "The [[Arithmometer]] was the first reliable, useful, commercially successful and mass-produced calculating machine."], "secs": [{"h": "Timeline", "s": "tl", "items": [["Ancient", "**Tally sticks**: a memory aid to record numbers, quantities or even messages."], ["2400 B.C.", "**Abacus**: invented in Babylonia. The familiar form was first used in China around 500 B.C. Does basic arithmetic."], ["1614", "**Napier's Bones** (John Napier): multiply, divide and find square and cube roots by moving rods in special boards."], ["1622", "**Slide Rule** (William Oughtred): based on Napier's logarithms. For multiplication, division, roots, logarithms and trigonometry, not normally addition or subtraction."], ["1642", "**Pascaline** (Blaise Pascal): addition and subtraction only, and too expensive."], ["1672", "**Stepped Reckoner** (Gottfried Wilhelm Leibniz): adds, subtracts, multiplies and divides automatically."], ["1820", "**Arithmometer** (Thomas de Colmar): first reliable, commercially successful, mass-produced calculating machine. Does the four basic operations."], ["1881*", "**Jacquard Loom** (Joseph-Marie Jacquard): an automatic loom controlled by punched cards. (*Year as written in your module.)"]]}], "eli5": "Before electricity, people built clever tools to count: sticks with notches, beads on rods, and gear machines. Each new tool did a bit more math than the last, until one machine could add, subtract, multiply and divide by itself.", "m": 1}, {"t": "From Babbage to the First Computer Companies", "sum": ["Memorize the 'firsts': first mechanical computer (Babbage), first programmer (Ada Byron), first printing calculator (Scheutz), first programmable computer (Z1), first electronic digital device (ABC), first electro-mechanical computer (Harvard Mark 1), first electronic general-purpose computer (ENIAC), first commercial computer (UNIVAC I), first stored program computer (EDVAC), first portable computer (Osborne 1).", "[[Eckert and Mauchly]] developed ENIAC, designed UNIVAC I and founded the first computer company.", "Acronyms: [[ENIAC]] = Electronic Numerical Integrator and Computer. [[EDVAC]] = Electronic Discrete Variable Automatic Computer. [[UNIVAC]] = UNIVersal Automatic Computer."], "secs": [{"h": "Timeline", "s": "tl", "items": [["1822 and 1834", "**Difference Engine and Analytical Engine** (Charles Babbage): automatic mechanical calculator for polynomial functions. The first mechanical computer."], ["1840", "**First computer programmer**: Augusta Ada Byron suggested the binary system to Babbage and wrote programs for the Analytical Engine."], ["1843", "**Scheutzian Calculation Engine** (Per Georg Scheutz): based on Babbage's difference engine. The first printing calculator."], ["1890", "**Tabulating Machine** (Herman Hollerith): helps summarize information and accounting."], ["1936 to 1938", "**Z1** (Konrad Zuse, Germany): the first programmable computer. Used punch tape for input and output."], ["1939 to 1942", "**Atanasoff-Berry Computer, ABC** (John Atanasoff and Clifford Berry, Iowa State University): the first electronic digital computing device."], ["1943", "**Harvard Mark 1** (Howard H. Aiken), also called IBM ASCC: the first electro-mechanical computer."], ["1946", "**ENIAC** (Eckert and Mauchly): the first electronic general-purpose computer."], ["1949", "**Electronic Controls Company**: the first computer company, founded by Eckert and Mauchly."], ["Commercial era", "**UNIVAC I** (Eckert and Mauchly): the first commercial computer."], ["1952", "**EDVAC** (Von Neumann): the first stored program computer. Its memory holds both a stored program and data."], ["1981", "**Osborne 1**: the first portable computer, released by the Osborne Computer Corporation."]]}], "eli5": "Think of a relay race of inventors. Babbage drew the first computer plan, Ada wrote the first program for it, and later teams built electric ones. ENIAC was the big electronic star, UNIVAC was the first one sold to businesses, and Osborne 1 was the first you could carry.", "m": 1}, {"t": "Basic Computing Periods (Ages)", "sum": ["There are four ages of information technology: [[Premechanical]], [[Mechanical]], [[Electromechanical]] and [[Electronic]]. The electronic age is the age we live in now.", "Premechanical: language and petroglyphs (picture drawings carved in rock), the Phoenician alphabet, marks in wet clay, papyrus paper, Chinese paper from rags, the first books and libraries, and Egyptian scrolls.", "The first numbering system (1 to 9) came from India around 100 A.D. The number [[0]] was invented in 875 A.D. The abacus was the popular calculator.", "Harvard Mark 1 size: 8 ft high, 50 ft long, 2 ft wide, 5 tons, programmed with punch cards.", "ENIAC: the first high-speed, digital, reprogrammable computer. Made for the U.S. Army for artillery firing tables. It covered 680 square feet, weighed 30 tons and used vacuum tubes."], "secs": [{"h": "The four ages", "s": "tl", "items": [["3000 B.C. to 1450 A.D.", "**Premechanical**: petroglyphs, alphabets, paper, books, libraries, numbers, abacus."], ["1450 to 1840", "**Mechanical**: slide rule, Pascaline and Babbage's difference engine (tabulates polynomial equations using finite differences)."], ["1840 to 1940", "**Electromechanical**: telegraph (early 1800s), Morse code by Samuel Morse (1835), telephone by Alexander Graham Bell (1876), radio by Guglielmo Marconi (1894), Harvard Mark 1."], ["1940 to now", "**Electronic**: ENIAC and everything after it, up to today's computers."]]}], "eli5": "Computer history has four chapters. First people drew and counted by hand. Then they built gear machines. Then electricity brought the telegraph, telephone and radio. Now we live in the electronic chapter with fast digital computers.", "m": 1}, {"t": "Generations of Computers", "sum": ["Five generations: 1st 1946 to 1958, 2nd 1959 to 1964, 3rd 1965 to 1970, 4th 1971 to today, 5th today to the future.", "Shortcut to remember the technology: [[vacuum tube]], [[transistor]], [[integrated circuit]], [[microprocessor]], [[artificial intelligence]].", "First generation machines used machine language, solved one problem at a time, took input from punched cards and paper tape and gave printouts. They were huge, hot and expensive.", "One transistor replaced the equivalent of 40 vacuum tubes."], "secs": [{"h": "Timeline", "s": "tl", "items": [["1st: 1946 to 1958", "**Vacuum tubes** and magnetic drums. Machine language. Examples: ENIAC, EDSAC, UNIVAC I, II, 1101."], ["2nd: 1959 to 1964", "**Transistors**: smaller, faster, cheaper, more reliable. Assembly language, magnetic core memory, FORTRAN and COBOL. Examples: UNIVAC III, RCA 501, IBM 7030 Stretch."], ["3rd: 1965 to 1970", "**Integrated circuits** on silicon chips (semiconductors). Instructions in billionths of a second. Operating system and BASIC appeared."], ["4th: 1971 to today", "**Microprocessor**: thousands of integrated circuits on one chip (CPU). Networks led to the Internet. GUI, mouse, handheld devices and the personal computer (Apple II)."], ["5th: today to future", "**Artificial Intelligence**: parallel processing and superconductors. Goal: natural language input, learning and self-organization. Voice recognition is an example."]]}], "eli5": "Each generation made computers smaller and smarter. First came huge glowing tubes, then tiny transistors, then chips, then one chip that holds a whole brain, and now we are teaching computers to learn.", "m": 1}, {"t": "The Web: Web 1.0, 2.0 and 3.0", "sum": ["The [[World Wide Web]] is information organized into web pages with text and graphics, connected by [[hypertext]] links.", "A [[website]] is a collection of linked pages with a common theme. The [[home page]] is the main page that the other pages link back to.", "[[Sir Tim Berners-Lee]] (TimBL) is best known as the inventor of the World Wide Web.", "[[Web 1.0]]: read-only, static web. Used as an 'information portal', with tables for layout. Disadvantages: read-only, limited user interaction, lack of standards. Examples: Mp3.com, home pages, directories, page views, HTML portals.", "[[Web 2.0]]: read-write, interactive web with user-generated content and collaboration. Pages that react to user input are [[dynamic pages]].", "[[Web 3.0]]: read-write intelligent web, named by John Markoff of the New York Times. Uses semantic web, distributed databases, natural language processing, machine learning, machine reasoning and autonomous agents.", "The [[semantic web]] is a web of data that systems can read and categorize, not just humans."], "secs": [{"h": "Web 2.0 examples and features", "s": "grid", "items": [["Social networking", "Facebook, Twitter, LinkedIn, Google+, Pinterest, Tumblr, Instagram"], ["Blogs", "WordPress, Blogger, Tumblr. Newest post appears first"], ["Wikis", "Wikipedia, Wikibooks, Wiktionary, Wikinews and others. Edited by the audience"], ["Video sharing", "YouTube, Facebook, LinkedIn, Flickr, Photobucket"], ["Folksonomy", "Users classify information with freely chosen keywords (tagging)"], ["Rich user interface", "Dynamic content that responds to user input"], ["User participation", "Others add content through comments, reviews and evaluations"], ["Long tail", "Services offered on demand, like a data plan"]]}], "eli5": "Web 1.0 is a library where you can only read books. Web 2.0 lets you write in the books too, like comments and posts. Web 3.0 is a smart library where the books understand what you want and bring you the right one.", "m": 2}, {"t": "Types of Websites", "sum": ["The module lists 12 types of websites. Match each type with its purpose."], "secs": [{"h": "The 12 types", "s": "grid", "items": [["eCommerce", "Sells products directly. Has a shopping cart and payment"], ["Business", "Represents a specific business, branded like it"], ["Entertainment", "Visited purely for fun"], ["Portfolio", "Shows examples of past work"], ["Media", "Collects news stories and reporting"], ["Brochure", "Simple business site with a few pages and contact info"], ["Nonprofit", "Online presence and donations for a nonprofit"], ["Educational", "Educational materials or information about an institution"], ["Infopreneur", "Creates and sells information products: courses, tutorials, videos, eBooks"], ["Personal", "Personal blogs, vlogs and photo diaries"], ["Web portal", "Internal site gathering information from many sources, usually with login"], ["Wiki or forum", "Many users collaborate on content, like Wikipedia"]]}], "eli5": "Websites are like different kinds of shops and places. Some sell things, some show your work, some tell news, some teach, and some are just your diary. The type depends on what the site is for.", "m": 2}, {"t": "The Internet: History and Major Components", "sum": ["The [[Internet]] ('net', a network of networks) is the largest computer network in the world and connects billions of users. The word comes from 'interconnection' and 'network'. Generally, nobody owns the internet.", "A [[network]] is a collection of computers and devices connected by communication channels and transmission media to share resources.", "Major components: [[servers]], [[IP address]], [[browser]], [[DNS]] and [[ISP]].", "Server types: application, web, proxy, mail, file and policy.", "[[Vinton Cerf]] is one of the 'fathers of the Internet', sharing the title with TCP/IP co-developer Bob Kahn."], "secs": [{"h": "History timeline", "s": "tl", "items": [["Jan 2, 1969", "**ARPA** (Advanced Research Project Agency) starts an experimental computer network. No central server, equal importance for every computer, so losing one or two nodes does not break the network."], ["1982", "The word 'internet' starts to be used."], ["1986", "First 'free net' created at Case Western Reserve University."], ["1991", "The US government allows business agencies to connect to the internet."]]}, {"h": "Major components", "s": "grid", "items": [["Application server", "Provides the business logic for an application program"], ["Web server", "Serves requested HTML pages or files"], ["Proxy server", "Intermediary between an endpoint device and another server"], ["Mail server", "Receives incoming e-mail and forwards outgoing e-mail"], ["File server", "Central storage and management of data files"], ["Policy server", "Security component that provides authorization services and tracks and controls files"], ["IP address", "Numerical label that identifies each network device"], ["Browser", "Program for viewing information on the web: Chrome, Safari, Internet Explorer, Opera, Mozilla"], ["DNS", "Phonebook of the internet. Examples: www.facebook.com, www.pup.edu.ph, www.academia.edu"], ["ISP", "Provides access to the internet. Two types: national and regional. Examples: Sky Broadband, PLDT, Converge"]]}, {"h": "Top-level domains", "s": "grid", "items": [[".com", "Commercial"], [".org", "Organization"], [".net", "Network"], [".edu", "Education"], [".gov", "National and state government agencies"], [".ph", "Philippines"], [".au", "Australia"]]}], "eli5": "The internet is a giant web of connected computers that nobody owns. Your device has an address (IP), a phonebook (DNS) turns names like facebook.com into addresses, a browser opens pages, and your ISP is the company that connects you.", "m": 2}, {"t": "Uses of the Internet and Internet Terms", "sum": ["Uses: look for information; school, jobs and home; e-mail; video teleconferencing; buy and sell products; social networking; watch and post videos; games; take college courses; monitor home while away; financial transactions; download music and movies.", "A [[bit]] is a single binary digit (0 or 1). A [[byte]] is generally eight bits.", "[[HTTP]] is the data communication standard of web pages. [[HTTPS]] adds a layer of encryption.", "[[Upload]] = send data from your computer to another computer. [[Download]] = bring data from another computer to yours."], "secs": [{"h": "Terms and definitions", "s": "grid", "items": [["Internet", "Global network of thousands of computer networks linked by data lines and wireless systems"], ["Web", "Collection of billions of webpages viewed with a web browser"], ["Email", "Most common method of sending and receiving messages online"], ["Social media", "Sites and apps for sharing comments, photos and videos"], ["Online gaming", "Games played with and against others over the Internet"], ["Software updates", "OS and app updates typically downloaded from the Internet"], ["HTML", "Hypertext Markup Language: coding language that tells a browser how to place pictures, text, multimedia and links"], ["URL", "Uniform Resource Locator: web address of a remote resource"], ["Bit", "Single digit in the binary system (base 2): 0 or 1"], ["Byte", "Generally eight bits"], ["Upload", "Transfer data from your computer to another computer"], ["Download", "Transfer data from another computer to your computer"], ["HTTP", "Hypertext Transfer Protocol: data communication standard of web pages"], ["HTTPS", "HTTP Secure: adds encryption to hide personal information and passwords"], ["Router", "Acts as the traffic cop for network signals coming from your ISP. Wired, wireless or both"], ["Encryption", "Mathematical scrambling of data so eavesdroppers cannot read it"], ["Web bot", "Program that performs a repetitive task on the Internet, like searching for information"], ["Search engine", "Software like Google or Yahoo that searches the web using keywords and phrases"]]}], "eli5": "These are the everyday words of the internet. A bit is one tiny 0 or 1, and eight of them make a byte. Uploading sends things out from you, downloading brings things to you, and the little 's' in https means your messages are put in a secret code.", "m": 2}];
+const Q=[{"q": "ICT stands for:", "c": "Information and Communications Technology", "w": ["Internet and Computer Technology", "Information and Computing Tools", "Integrated Communication Terminals"], "t": 1}, {"q": "Which best describes ICT?", "c": "All devices, networks, applications and systems that let people and organizations interact in the digital world", "w": ["Only the internet and social media", "Only computer hardware", "Only mobile phones"], "t": 1}, {"q": "In the 'flipped classroom' model, students:", "c": "Watch lectures at home on the computer and use class time for interactive exercises", "w": ["Do all their work in class without computers", "Are taught only by robots", "Only use chalkboards and textbooks"], "t": 2}, {"q": "Why do many pharmacies use robot technology to pick prescribed drugs?", "c": "So highly trained staff can focus on jobs needing human intelligence and interaction", "w": ["To replace all pharmacists", "To make medicines free", "To avoid using any computers"], "t": 2}, {"q": "According to the module, which social site seems to be the leading place where people communicate and share opinions?", "c": "Facebook", "w": ["LinkedIn", "Flickr", "Delicious"], "t": 2}, {"q": "Which is a POSITIVE impact of ICT?", "c": "Improved access to education through distance learning and online tutorials", "w": ["Job loss through automation", "Reduced personal interaction", "High cost of hardware and software"], "t": 3}, {"q": "Robots replacing people on an assembly line is an example of:", "c": "Job loss (a negative impact)", "w": ["Distance learning", "Better security through encryption", "Creation of new jobs"], "t": 3}, {"q": "Reduced physical activity caused by heavy ICT use can lead to:", "c": "Obesity, heart disease and diabetes", "w": ["Cheaper hardware", "Faster data processing", "Better social skills"], "t": 3}, {"q": "Which is a principal characteristic of a computer?", "c": "It can quickly store and retrieve large amounts of data", "w": ["It can think and feel like a human", "It works without any instructions", "It only works when connected to the internet"], "t": 4}, {"q": "The first recorded use of the word 'computer' (1613) referred to:", "c": "A person who carried out calculations", "w": ["A mechanical calculator", "An electronic device", "A punch card machine"], "t": 4}, {"q": "Computers that control heart rate monitors and help analyze data to find diagnoses belong to which application?", "c": "Healthcare", "w": ["Publishing", "Navigation", "Marketing"], "t": 5}, {"q": "Computers combined with satellites and GPS to pinpoint your location are used in:", "c": "Navigation", "w": ["Publishing", "Retail and trade", "Marketing"], "t": 5}, {"q": "Who invented the slide rule in 1622, based on Napier's ideas about logarithms?", "c": "William Oughtred", "w": ["Blaise Pascal", "Gottfried Leibniz", "Thomas de Colmar"], "t": 6}, {"q": "The Pascaline (1642), limited to addition and subtraction, was invented by:", "c": "Blaise Pascal", "w": ["John Napier", "Charles Babbage", "Herman Hollerith"], "t": 6}, {"q": "Which Leibniz machine (1672) could add, subtract, multiply and divide automatically?", "c": "Stepped Reckoner", "w": ["Pascaline", "Abacus", "Napier's Bones"], "t": 6}, {"q": "A byte generally consists of:", "c": "Eight bits", "w": ["Four bits", "Two bits", "Sixteen bits"], "t": 13}, {"q": "Charles Babbage's Difference Engine and Analytical Engine are considered the first:", "c": "Mechanical computer", "w": ["Electronic computer", "Portable computer", "Commercial computer"], "t": 7}, {"q": "Who wrote programs for the Analytical Engine and is called the first computer programmer?", "c": "Augusta Ada Byron", "w": ["Konrad Zuse", "Clifford Berry", "Per Georg Scheutz"], "t": 7}, {"q": "Which was the first electro-mechanical computer (also known as the IBM ASCC)?", "c": "Harvard Mark 1", "w": ["ENIAC", "UNIVAC I", "Z1"], "t": 7}, {"q": "The first programmable computer, created by Konrad Zuse in Germany, was the:", "c": "Z1", "w": ["ABC", "EDVAC", "Osborne 1"], "t": 7}, {"q": "The first electronic digital computing device, built at Iowa State University, was the:", "c": "Atanasoff-Berry Computer (ABC)", "w": ["ENIAC", "UNIVAC I", "Harvard Mark 1"], "t": 7}, {"q": "ENIAC stands for:", "c": "Electronic Numerical Integrator and Computer", "w": ["Electronic Numerical Integrator and Calculator", "Electronic Numerical Integrator Automatic Computer", "Electronic Number Input and Computer"], "t": 7}, {"q": "The first commercial computer was the:", "c": "UNIVAC I", "w": ["ENIAC", "Harvard Mark 1", "Z1"], "t": 7}, {"q": "The first stored program computer, designed by Von Neumann, was the:", "c": "EDVAC", "w": ["ENIAC", "Z1", "UNIVAC I"], "t": 7}, {"q": "Which age ran from about 3000 B.C. to 1450 A.D. and included petroglyphs and the abacus?", "c": "Premechanical", "w": ["Mechanical", "Electromechanical", "Electronic"], "t": 8}, {"q": "The telegraph, Morse code, telephone and radio belong to which age (1840 to 1940)?", "c": "Electromechanical", "w": ["Premechanical", "Mechanical", "Electronic"], "t": 8}, {"q": "First generation computers (1946 to 1958) used:", "c": "Vacuum tubes", "w": ["Transistors", "Integrated circuits", "Microprocessors"], "t": 9}, {"q": "In the second generation, one transistor replaced the equivalent of about how many vacuum tubes?", "c": "40", "w": ["4", "400", "1,000"], "t": 9}, {"q": "The integrated circuit was the hallmark of which generation?", "c": "Third generation", "w": ["First generation", "Second generation", "Fourth generation"], "t": 9}, {"q": "Fifth generation computers are based on:", "c": "Artificial Intelligence", "w": ["Vacuum tubes", "Punched cards", "Magnetic drums"], "t": 9}, {"q": "Web 1.0 is best described as the:", "c": "Read-only, static web", "w": ["Read-write interactive web", "Read-write intelligent web", "Mobile-only web"], "t": 10}, {"q": "Who is best known as the inventor of the World Wide Web?", "c": "Sir Tim Berners-Lee", "w": ["Vinton Cerf", "John Markoff", "Bob Kahn"], "t": 10}, {"q": "Web pages that are affected by user input or preference, like comments or accounts, are called:", "c": "Dynamic pages", "w": ["Static pages", "Home pages", "Semantic pages"], "t": 10}, {"q": "The semantic web is described as a:", "c": "Web of data", "w": ["Web of static pages", "Web of printed documents", "Web of home pages only"], "t": 10}, {"q": "A website with a shopping cart and a way to pay by credit card is a(n):", "c": "eCommerce website", "w": ["Brochure website", "Portfolio website", "Personal website"], "t": 11}, {"q": "Websites devoted to showing examples of past work are called:", "c": "Portfolio websites", "w": ["Media websites", "Nonprofit websites", "Web portals"], "t": 11}, {"q": "ARPA started an experimental computer network on January 2 of which year?", "c": "1969", "w": ["1982", "1986", "1991"], "t": 12}, {"q": "The Domain Name System (DNS) is often called the:", "c": "Phonebook of the internet", "w": ["Post office of the internet", "Library of the web", "Memory of the browser"], "t": 12}, {"q": "Which domain suffix stands for the Philippines?", "c": ".ph", "w": [".au", ".gov", ".edu"], "t": 12}, {"q": "HTTPS differs from HTTP because it:", "c": "Adds a layer of encryption to hide your personal information", "w": ["Makes pages load faster", "Blocks all advertisements", "Only works on mobile phones"], "t": 13}];
+const MOD=["Module 1: Introduction to ICT","Module 2: History of Computers","Module 3: The Web and the Internet"];
+const MODSTART={0:0,3:1,9:2}; /* first topic index of each module */
+
+/* ===================== HELPERS ===================== */
+const $=id=>document.getElementById(id);
+const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const fmt=s=>esc(s).replace(/\[\[(.+?)\]\]/g,'<code>$1</code>').replace(/\*\*(.+?)\*\*/g,'<b>$1</b>');
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const DUR=1800, COOL=30*60*1000;
+const ls={get:(k,d)=>{try{const v=localStorage.getItem(k);return v===null?d:v}catch(e){return d}},set:(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}},del:k=>{try{localStorage.removeItem(k)}catch(e){}}};
+
+/* ===================== THEME ===================== */
+function setTheme(t){document.documentElement.dataset.theme=t;ls.set('geTheme',t);document.querySelectorAll('#dots b').forEach(b=>b.classList.toggle('on',b.dataset.t===t));if(window.recolor)recolor()}
+document.querySelectorAll('#dots b').forEach(b=>b.onclick=()=>setTheme(b.dataset.t));
+
+/* ===================== BUILD REVIEWER ===================== */
+let done=[];try{done=JSON.parse(ls.get('geDone','[]'))||[]}catch(e){done=[]}
+function updStats(){
+  $('sTop').textContent=done.length+'/'+T.length;
+  const b=ls.get('geBest',null);$('sBest').textContent=b===null?'--':b+'/40';
+  document.querySelectorAll('#side a').forEach((a,i)=>a.classList.toggle('done',done.includes(i)));
+  document.querySelectorAll('.mark').forEach((m,i)=>{const d=done.includes(i);m.classList.toggle('done',d);m.textContent=d?'✓ Studied':'Mark as studied'});
+}
+function section(s){
+  let h='<div class="sh">'+esc(s.h)+'</div>';
+  if(s.s==='tl')h+='<div class="tl">'+s.items.map(i=>'<div class="ti"><span class="yr">'+esc(i[0])+'</span><div>'+fmt(i[1])+'</div></div>').join('')+'</div>';
+  else h+='<div class="fg">'+s.items.map(i=>'<div class="fc"><b>'+esc(i[0])+'</b><span>'+esc(i[1])+'</span></div>').join('')+'</div>';
+  return h;
+}
+T.forEach((x,i)=>{
+  if(i in MODSTART){const m=document.createElement('div');m.className='mod';m.textContent=MOD[MODSTART[i]];$('side').appendChild(m)}
+  const a=document.createElement('a');a.href='#t'+i;a.id='s'+i;
+  a.innerHTML='<em><span>'+(i+1)+'</span></em><span class="t">'+esc(x.t.split(/[:(]/)[0].trim())+'</span>';
+  $('side').appendChild(a);
+  const d=document.createElement('div');d.className='card rv';d.id='t'+i;
+  d.innerHTML='<div class="th"><div class="num">'+(i+1)+'</div><div><small>'+esc(MOD[x.m])+'</small><h3>'+esc(x.t)+'</h3></div></div>'
+   +'<ul class="pts">'+x.sum.map(s=>'<li>'+fmt(s)+'</li>').join('')+'</ul>'
+   +x.secs.map(section).join('')
+   +'<div class="eli"><button class="btn sm" onclick="this.parentNode.querySelector(\'.e5\').classList.toggle(\'on\')">&#129490; Explain like I\'m 5</button>'
+   +'<button class="btn sm ghost mark" onclick="toggleDone('+i+')">Mark as studied</button>'
+   +'<div class="e5">&#129490; '+esc(x.eli5)+'</div></div>';
+  $('topics').appendChild(d);
+});
+function toggleDone(i){const k=done.indexOf(i);if(k>=0)done.splice(k,1);else done.push(i);ls.set('geDone',JSON.stringify(done));updStats()}
+let allOn=false;
+function toggleAll(){allOn=!allOn;document.querySelectorAll('.e5').forEach(e=>e.classList.toggle('on',allOn));if(!examActive)show('rev')}
+function printRev(){if(examActive)return;show('rev');setTimeout(()=>window.print(),150)}
+
+/* reveal + scroll spy + spotlight */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.05});
+document.querySelectorAll('.rv').forEach(c=>io.observe(c));
+const spy=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){document.querySelectorAll('#side a').forEach(a=>a.classList.remove('on'));const a=$('s'+e.target.id.slice(1));if(a){a.classList.add('on');if(innerWidth<=980)a.scrollIntoView({inline:'center',block:'nearest'})}}
+}),{rootMargin:'-30% 0px -60% 0px'});
+document.querySelectorAll('#topics .card').forEach(c=>spy.observe(c));
+/* hero typewriter */
+const TYPE=`> open "Living in the IT Era"
+1969  ARPA starts a network
+1946  ENIAC is completed
+1991  business joins the internet
+Web 1.0 -> Web 2.0 -> Web 3.0
+
+> status: ready to ace the exam`;
+const col=s=>esc(s).replace(/"([^"]*)"/g,'<span class="st">"$1"</span>').replace(/\b(\d{4})\b/g,'<span class="nu">$1</span>').replace(/^&gt;/gm,'<span class="tg">&gt;</span>');
+(function(){let i=0;const el=$('typer');
+  function step(){
+    if(i<=TYPE.length){el.innerHTML=col(TYPE.slice(0,i))+'<span class="cur"></span>';i++;setTimeout(step,i%10===0?140:30)}
+    else setTimeout(()=>{i=0;step()},3800);
+  }step();
+})();
+
+/* ===================== BACKGROUND SYMBOLS ===================== */
+(function(){
+  const cv=$('fx'),ctx=cv.getContext('2d');let W,H,P=[];
+  const SYM=['0','1','www','.com','@','http','</>','ICT','IP','DNS','Web','{ }','01','.ph','HTML','URL','Wi-Fi','bit'];
+  function size(){W=cv.width=innerWidth;H=cv.height=innerHeight}
+  size();addEventListener('resize',size);
+  for(let i=0;i<46;i++)P.push({x:Math.random()*1600,y:Math.random()*1000,s:SYM[i%SYM.length],v:.12+Math.random()*.4,z:10+Math.random()*20,o:.04+Math.random()*.1,r:Math.random()*6.28,w:(Math.random()-.5)*.003});
+  let colr='#2dd4bf';
+  window.recolor=()=>{colr=getComputedStyle(document.documentElement).getPropertyValue('--ac').trim()||'#2dd4bf'};recolor();
+  (function loop(){
+    ctx.clearRect(0,0,W,H);ctx.fillStyle=colr;
+    P.forEach(p=>{p.y-=p.v;p.r+=p.w;if(p.y<-40){p.y=H+40;p.x=Math.random()*W}
+      ctx.save();ctx.globalAlpha=p.o;ctx.font='700 '+p.z+'px Consolas,monospace';ctx.translate(p.x%W,p.y);ctx.rotate(Math.sin(p.r)*.3);ctx.fillText(p.s,0,0);ctx.restore()});
+    requestAnimationFrame(loop);
+  })();
+})();
+
+/* ===================== VIEWS ===================== */
+function show(v){
+  if(examActive)return;
+  ['rev','exh','exam'].forEach(k=>$(k).classList.toggle('hide',k!==v));
+  $('tabRev').classList.toggle('on',v==='rev');$('tabEx').classList.toggle('on',v==='exh');
+  if(v==='exh')updateCool();
+  window.scrollTo(0,0);
+}
+
+/* ===================== COOLDOWN ===================== */
+let coolT=null,leftNote=false;
+function leftMs(){const l=+ls.get('geExamLast',0)||0;return Math.max(0,l+COOL-Date.now())}
+function updateCool(){
+  clearInterval(coolT);
+  const run=()=>{
+    const m=leftMs();const b=$('cool'),s=$('startBtn');
+    if(m>0){const mm=Math.floor(m/60000),ss=Math.floor(m/1000)%60;
+      b.classList.remove('hide');
+      b.textContent=(leftNote?'🚪 You left the exam, so it was ended. ':'')+'⏳ You can retake the exam in '+mm+':'+String(ss).padStart(2,'0');
+      s.disabled=true;}
+    else{b.classList.add('hide');s.disabled=false;clearInterval(coolT);}
+  };run();coolT=setInterval(run,1000);
+}
+
+/* ===================== EXAM ===================== */
+let examActive=false,qs=[],ans={},flags={},cur=0,endAt=0,tick=null;
+
+function startExam(){
+  if(leftMs()>0)return;
+  leftNote=false;
+  qs=shuf(Q.map((q,i)=>({i,q:q.q,c:q.c,o:shuf([q.c].concat(q.w))})));
+  ans={};flags={};cur=0;endAt=Date.now()+DUR*1000;examActive=true;
+  $('topbar').classList.add('hide');$('foot').classList.add('hide');
+  ['rev','exh'].forEach(k=>$(k).classList.add('hide'));$('exam').classList.remove('hide');
+  $('resultBox').innerHTML='';
+  ls.set('geExamState','1');ls.set('geExamAns',JSON.stringify({}));
+  renderQ();window.scrollTo(0,0);
+  tick=setInterval(()=>{
+    const s=Math.max(0,Math.round((endAt-Date.now())/1000));
+    $('timer').textContent=String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');
+    $('ring').classList.toggle('low',s<=300);
+    $('pr').style.strokeDashoffset=326.7*(1-s/DUR);
+    if(s<=0)finish('time');
+  },500);
+}
+function renderQ(){
+  const q=qs[cur],n=Object.keys(ans).length;
+  $('qcount').textContent='Question '+(cur+1)+' of '+qs.length+' · '+n+' answered';
+  $('abar').style.width=(n/qs.length*100)+'%';
+  $('qbox').style.animation='none';void $('qbox').offsetWidth;$('qbox').style.animation='';
+  $('qbox').innerHTML='<div class="qhead"><span class="qtag">Item '+(cur+1)+'</span><button class="btn sm ghost flag '+(flags[q.i]?'on':'')+'" onclick="flag()">⚑ '+(flags[q.i]?'Flagged':'Flag')+'</button></div>'
+   +'<p class="qtext">'+esc(q.q)+'</p>'
+   +'<div class="opts">'+q.o.map((o,k)=>'<button class="opt '+(ans[q.i]===o?'sel':'')+'" onclick="pick('+k+')">'+esc(o)+'</button>').join('')+'</div>';
+  $('qnav').innerHTML=qs.map((x,k)=>'<button class="'+(ans[x.i]!==undefined?'done ':'')+(flags[x.i]?'fl ':'')+(k===cur?'cur':'')+'" onclick="cur='+k+';renderQ()">'+(k+1)+'</button>').join('');
+}
+function pick(k){const q=qs[cur];ans[q.i]=q.o[k];ls.set('geExamAns',JSON.stringify(ans));renderQ()}
+function flag(){const q=qs[cur];flags[q.i]=!flags[q.i];renderQ()}
+function go(d){cur=Math.min(qs.length-1,Math.max(0,cur+d));renderQ()}
+document.addEventListener('keydown',e=>{
+  if(!examActive||document.querySelector('.modal'))return;
+  const k=e.key.toLowerCase();
+  if(['1','2','3','4'].includes(k))pick(+k-1);
+  else if(['a','b','c','d'].includes(k))pick('abcd'.indexOf(k));
+  else if(k==='arrowright')go(1);else if(k==='arrowleft')go(-1);else if(k==='f')flag();
+});
+
+function submitExam(){
+  const un=qs.length-Object.keys(ans).length,fl=Object.values(flags).filter(Boolean).length;
+  const m=document.createElement('div');m.className='modal';
+  m.innerHTML='<div class="mbox"><h3>Submit your exam?</h3><p>'+(un?'⚠️ You still have <b>'+un+'</b> unanswered item'+(un>1?'s':'')+'. ':'All items answered. ')+(fl?fl+' flagged. ':'')+'You cannot undo this.</p><div class="row"><button class="btn ghost" id="mNo">Keep going</button><button class="btn" id="mYes">Submit now</button></div></div>';
+  document.body.appendChild(m);
+  $('mNo').onclick=()=>m.remove();
+  $('mYes').onclick=()=>{m.remove();finish('submit')};
+}
+
+function score(a){let s=0;Q.forEach((q,i)=>{if(a[i]===q.c)s++});return s}
+
+function finish(reason,savedAns){
+  if(!examActive&&!savedAns)return;
+  const a=savedAns||ans;
+  examActive=false;clearInterval(tick);
+  document.querySelectorAll('.modal').forEach(x=>x.remove());
+  ls.set('geExamLast',Date.now());
+  ls.del('geExamState');ls.del('geExamAns');
+  $('exam').classList.add('hide');$('topbar').classList.remove('hide');$('foot').classList.remove('hide');
+  $('exh').classList.remove('hide');$('rev').classList.add('hide');
+  $('tabRev').classList.remove('on');$('tabEx').classList.add('on');
+
+  /* Left the exam (tab switch / reload): no result, no answers */
+  if(reason==='tab'||reason==='reload'){
+    leftNote=true;$('resultBox').innerHTML='';
+    updateCool();window.scrollTo(0,0);return;
+  }
+
+  const s=score(a),n=Object.keys(a).length,pct=Math.round(s/40*100);
+  const best=+ls.get('geBest',-1);if(s>best){ls.set('geBest',s)}updStats();
+  const msg={time:'⏰ Time is up!',submit:'✅ Exam submitted'}[reason];
+  const title=pct>=90?'Outstanding! 🏆':pct>=75?'Great job! 🎉':pct>=50?'Getting there 💪':'Keep reviewing 📚';
+  $('resultBox').innerHTML='<div class="card" style="margin-top:24px">'
+   +'<div class="warnbox" style="margin-top:0">'+msg+'</div>'
+   +'<div class="res"><div class="sring"><svg viewBox="0 0 170 170"><defs><linearGradient id="gr2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2dd4bf"/><stop offset=".5" stop-color="#60a5fa"/><stop offset="1" stop-color="#f59e0b"/></linearGradient></defs><circle class="tr" cx="85" cy="85" r="75"/><circle class="pr" id="spr" cx="85" cy="85" r="75"/></svg><div class="mid"><div><b class="grad">'+s+'/40</b><span>'+pct+'%</span></div></div></div>'
+   +'<div class="rtxt"><h3>'+title+'</h3><p class="note">Answered '+n+' of 40 · Unanswered items count as wrong.<br>You can retake the exam after 30 minutes. Head back to the Reviewer anytime.</p>'
+   +'<button class="btn sm" onclick="show(\'rev\')">Back to Reviewer</button></div></div>'
+   +'<h3 style="margin:22px 0 0">Answer Key</h3><div class="chips" id="chips"><span class="chip on" data-f="all">All 40</span><span class="chip" data-f="x">Wrong ('+(40-s)+')</span><span class="chip" data-f="ok">Correct ('+s+')</span></div><div id="akList"></div></div>';
+  const draw=f=>{
+    $('akList').innerHTML=Q.map((q,i)=>({q,i,ok:a[i]===q.c})).filter(o=>f==='all'||(f==='x'?!o.ok:o.ok)).map(({q,i,ok})=>
+      '<div class="ak '+(ok?'':'x')+'"><p>'+(i+1)+'. '+esc(q.q)+'</p><div class="y">Your answer: '+(a[i]!==undefined?esc(a[i]):'(none)')+' '+(ok?'✅':'❌')+'</div><div class="c">Correct: '+esc(q.c)+'</div>'+(ok?'':'<div class="rv2">Review: topic '+q.t+'. '+esc(T[q.t-1].t)+'</div>')+'</div>').join('')||'<p class="note">Nothing here.</p>';
+  };draw('all');
+  document.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{document.querySelectorAll('.chip').forEach(x=>x.classList.remove('on'));c.classList.add('on');draw(c.dataset.f)});
+  updateCool();window.scrollTo(0,0);
+  setTimeout(()=>{const r=$('spr');if(r)r.style.strokeDashoffset=471.2*(1-s/40)},120);
+  if(pct>=75)boom();
+}
+
+/* confetti */
+function boom(){
+  const cv=$('confetti'),c=cv.getContext('2d');cv.classList.remove('hide');cv.width=innerWidth;cv.height=innerHeight;
+  const cols=['#2dd4bf','#60a5fa','#f59e0b','#34d399','#f472b6'];
+  const ps=Array.from({length:150},()=>({x:innerWidth/2,y:innerHeight/3,vx:(Math.random()-.5)*16,vy:-Math.random()*15-3,s:5+Math.random()*7,c:cols[Math.random()*5|0],r:Math.random()*6,vr:(Math.random()-.5)*.4}));
+  let f=0;(function loop(){
+    c.clearRect(0,0,cv.width,cv.height);
+    ps.forEach(p=>{p.vy+=.28;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;c.save();c.translate(p.x,p.y);c.rotate(p.r);c.fillStyle=p.c;c.fillRect(-p.s/2,-p.s/4,p.s,p.s/2);c.restore()});
+    if(++f<190)requestAnimationFrame(loop);else{c.clearRect(0,0,cv.width,cv.height);cv.classList.add('hide')}
+  })();
+}
+
+/* Scroll progress bar */
+addEventListener('scroll',()=>{const h=document.documentElement;$('prog').style.width=(h.scrollTop/((h.scrollHeight-h.clientHeight)||1)*100)+'%'},{passive:true});
+
+/* Tab switch / leaving detection */
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&examActive)finish('tab')});
+window.addEventListener('blur',()=>{if(examActive)finish('tab')});
+window.addEventListener('pagehide',()=>{if(examActive){ls.set('geExamLast',Date.now())}});
+
+/* If page was reloaded/closed during an exam: end it quietly */
+if(ls.get('geExamState',null)){
+  let sa={};try{sa=JSON.parse(ls.get('geExamAns','{}'))}catch(e){}
+  examActive=true;finish('reload',sa);
+}
+
+setTheme(ls.get('geTheme','teal'));
+updStats();
+</script>
+</body>
+</html>
