@@ -579,7 +579,6 @@ updStats();
 </script>
 <script type="module">
 const deniedMessage = "MUST ACCESS THROUGH BSIT_STUDY";
-const expectedMaterialId = "-P3ppIxt7tqyuk3mNHTG";
 const redeemUrl = "https://bsit-study.vercel.app/api/redeemViewerTicket";
 const gateMessage = document.getElementById("access-message");
 
@@ -596,11 +595,6 @@ async function validateViewerTicket() {
     denyAccess("ticket or material ID is missing");
     return;
   }
-  if (materialId !== expectedMaterialId) {
-    denyAccess("ticket is for a different material");
-    return;
-  }
-
   try {
     const response = await fetch(redeemUrl, {
       method: "POST",
@@ -614,7 +608,7 @@ async function validateViewerTicket() {
     if (!response.ok) throw new Error(`Ticket service returned HTTP ${response.status}`);
 
     const result = await response.json();
-    if (result.valid !== true || result.materialId !== expectedMaterialId) {
+    if (result.valid !== true || result.materialId !== materialId) {
       denyAccess("the server returned an invalid ticket response");
       return;
     }
