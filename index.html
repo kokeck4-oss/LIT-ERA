@@ -48,6 +48,7 @@ header{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:10px
 .dots b.on{border-color:#fff;box-shadow:0 0 12px currentColor}
 .ibtn{background:var(--glass);border:1px solid var(--line);color:var(--txt);padding:8px 13px;border-radius:12px;cursor:pointer;font-weight:600;font-size:13px;transition:.25s}
 .ibtn:hover{border-color:var(--ac);box-shadow:0 0 18px color-mix(in srgb,var(--ac) 35%,transparent);transform:translateY(-1px)}
+a.ibtn{display:inline-block;text-decoration:none}
 
 /* ---------- buttons ---------- */
 .btn{background:linear-gradient(135deg,var(--ac),var(--ac2));color:#04070f;border:0;padding:12px 22px;border-radius:14px;font-weight:800;cursor:pointer;font-size:15px;box-shadow:0 6px 24px color-mix(in srgb,var(--ac) 35%,transparent);transition:.25s}
@@ -225,7 +226,7 @@ footer{text-align:center;color:var(--mut);font-size:13px;padding:30px 0 10px}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
-/* ---------- print (Print button saves the reviewer as PDF) ---------- */
+/* ---------- print ---------- */
 @media print{
   #fx,.aurora,.grid,header,.hero,.stats,#side,.cta,.eli .btn,#exh,#exam,footer,#prog,#confetti{display:none!important}
   body{background:#fff;color:#111}
@@ -261,7 +262,7 @@ footer{text-align:center;color:var(--mut);font-size:13px;padding:30px 0 10px}
     <b style="background:#fb7185;color:#fb7185" data-t="rose"></b>
   </div>
   <button class="ibtn" onclick="toggleAll()">&#129490; ELI5 all</button>
-  <button class="ibtn" onclick="printRev()">&#128424; Print</button>
+  <a class="ibtn" href="GE_LITE_Reviewer.pdf" download="GE_LITE_Reviewer.pdf">&#128229; Download PDF reviewer</a>
 </header>
 
 <main class="wrap">
@@ -388,8 +389,6 @@ T.forEach((x,i)=>{
 function toggleDone(i){const k=done.indexOf(i);if(k>=0)done.splice(k,1);else done.push(i);ls.set('geDone',JSON.stringify(done));updStats()}
 let allOn=false;
 function toggleAll(){allOn=!allOn;document.querySelectorAll('.e5').forEach(e=>e.classList.toggle('on',allOn));if(!examActive)show('rev')}
-function printRev(){if(examActive)return;show('rev');setTimeout(()=>window.print(),150)}
-
 /* reveal + scroll spy + spotlight */
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.05});
 document.querySelectorAll('.rv').forEach(c=>io.observe(c));
